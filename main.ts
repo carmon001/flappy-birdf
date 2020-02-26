@@ -1,15 +1,33 @@
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
-    game.over(false)
-})
-controller.anyButton.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.vy = -100
-})
-let projectile: Sprite = null
-let bottomImage: Image = null
-let topImage: Image = null
-let gap = 0
-let mySprite: Sprite = null
-scene.setBackgroundImage(img`
+// its the sprite, which is a capitalist pig
+function pig () {
+    mySprite = sprites.create(img`
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . f f . . . . . . . . f f . . . . . . . . 
+. . . . . . f 3 3 f f f f f f f f 3 3 f . . . . . . . 
+. . . . . . f 3 3 3 3 3 3 3 3 3 3 3 3 f . . . . . . . 
+. . . . . . . f f 3 3 3 3 3 3 3 3 f f . . . . . . . . 
+. . . . . . . f 3 f f 3 3 3 3 f f 3 f . . . . . . . . 
+. . . . . . f 3 3 f f 3 3 3 3 f f 3 3 f . . . . . . . 
+. . . . . . f 3 3 3 3 f f f f 3 3 3 3 f . . . . . . . 
+. . . . . . f 3 3 3 f 3 3 3 3 f 3 3 3 f . . . . . . . 
+. . . . . . f 3 3 3 f 3 3 3 3 f 3 3 3 f . . . . . . . 
+. . . . . . f 3 3 3 3 f f f f 3 3 3 3 f . . . . . . . 
+. . . . . . f 3 3 3 3 3 3 3 3 3 3 3 3 f . . . . . . . 
+. . . . . . . f 3 f 3 3 3 3 3 3 f 3 f . . . . . . . . 
+. . . . . . . f 3 3 f f f f f f 3 3 f . . . . . . . . 
+. . . . . . . f f f f . . . . f f f f . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 
+`, SpriteKind.Player)
+    mySprite.ay = 300
+}
+// its my own made background
+function background () {
+    scene.setBackgroundImage(img`
 f f f f f f f f f f f f f f f f f f f f f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
 f f f f f f f f f f f f f f f f f f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
 f f f f f f f f f f f f f f f f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
@@ -131,25 +149,20 @@ f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
 f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
 f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
 `)
-mySprite = sprites.create(img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . f f . . . . . . . . f f . . 
-. f 3 3 f f f f f f f f 3 3 f . 
-. f 3 3 3 3 3 3 3 3 3 3 3 3 f . 
-. . f f 3 3 3 3 3 3 3 3 f f . . 
-. . f 3 f f 3 3 3 3 f f 3 f . . 
-. f 3 3 f f 3 3 3 3 f f 3 3 f . 
-. f 3 3 3 3 f f f f 3 3 3 3 f . 
-. f 3 3 3 f 3 3 3 3 f 3 3 3 f . 
-. f 3 3 3 f 3 3 3 3 f 3 3 3 f . 
-. f 3 3 3 3 f f f f 3 3 3 3 f . 
-. f 3 3 3 3 3 3 3 3 3 3 3 3 f . 
-. . f 3 f 3 3 3 3 3 3 f 3 f . . 
-. . f 3 3 f f f f f f 3 3 f . . 
-. . f f f f . . . . f f f f . . 
-`, SpriteKind.Player)
-mySprite.ay = 300
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    game.over(false)
+})
+controller.anyButton.onEvent(ControllerButtonEvent.Pressed, function () {
+    mySprite.vy = -100
+})
+let projectile: Sprite = null
+let bottomImage: Image = null
+let topImage: Image = null
+let gap = 0
+let mySprite: Sprite = null
+pig()
+background()
 game.onUpdateInterval(1500, function () {
     info.changeScoreBy(1)
     gap = Math.randomRange(0, 3)
@@ -175,16 +188,16 @@ game.onUpdateInterval(1500, function () {
         bottomImage = img`
 . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . e e e e . . . . . . . . . . . 
-. . . . . . . e e e e e e e e . . . . . . . . . 
-. . . . . . e e e e f f e e e e . . . . . . . . 
-. . . . . e e e f f f f f f e e e . . . . . . . 
-. . . . e e e f f f f f f f f e e e . . . . . . 
-. . . . e e f f f f f f f f f f e e . . . . . . 
-. . . . f e e f f f f f f f f e e f . . . . . . 
-. . . . f e e e f f f f f f e e e f . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . e e . . . . . . . . . . e e . . . . . . 
+. . . . f e e . . . . . . . . e e f . . . . . . 
+. . . . f e e e . . . . . . e e e f . . . . . . 
 . . . . e 4 e e e e e e e e e e 4 e . . . . . . 
-. . . . e e 4 f e f f f f e f 4 e e . . . . . . 
+. . . . e e 4 4 e 4 4 4 4 e 4 4 e e . . . . . . 
 . . . . e e 4 4 4 4 4 4 4 4 4 4 e e . . . . . . 
 . . . . f e 4 4 5 4 4 4 4 4 f f e f . . . . . . 
 . . . . f e 4 4 5 5 4 4 4 4 f f e f . . . . . . 
@@ -268,24 +281,24 @@ game.onUpdateInterval(1500, function () {
 . . . . . . 4 4 4 5 4 4 4 e e f f f . . . . . . 
 . . . . . . 4 4 5 5 4 4 4 e e f f f . . . . . . 
 . . . . . . 4 4 5 4 4 4 4 e e f f f . . . . . . 
-. . . . . . 4 4 5 4 4 4 4 e e f f f . . . . . . 
-. . . . . . 4 4 5 4 4 4 4 e e f f f . . . . . . 
-. . . . . . 4 4 5 4 4 4 4 e e f f f f . . . . . 
-. . . . . . 4 4 5 4 4 4 4 e e f f f f . . . . . 
+. . . . . . . 4 5 4 4 4 4 e e f f . . . . . . . 
+. . . . . . . . . 4 4 4 4 e e f . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
 `
         bottomImage = img`
 . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . e e e e . . . . . . . . . . . 
-. . . . . . . e e e e e e e e . . . . . . . . . 
-. . . . . . e e e e f f e e e e . . . . . . . . 
-. . . . . e e e f f f f f f e e e . . . . . . . 
-. . . . e e e f f f f f f f f e e e . . . . . . 
-. . . . e e f f f f f f f f f f e e . . . . . . 
-. . . . f e e f f f f f f f f e e f . . . . . . 
-. . . . f e e e f f f f f f e e e f . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . e e . . . . . . . . . . e e . . . . . . 
+. . . . f e e . . . . . . . . e e f . . . . . . 
+. . . . f e e e . . . . . . e e e f . . . . . . 
 . . . . e 4 e e e e e e e e e e 4 e . . . . . . 
-. . . . e e 4 f e f f f f e f 4 e e . . . . . . 
+. . . . e e 4 4 e 4 4 4 4 e 4 4 e e . . . . . . 
 . . . . e e 4 4 4 4 4 4 4 4 4 4 e e . . . . . . 
 . . . . f e 4 4 5 4 4 4 4 4 f f e f . . . . . . 
 . . . . f e 4 4 5 5 4 4 4 4 f f e f . . . . . . 
@@ -377,24 +390,24 @@ game.onUpdateInterval(1500, function () {
 . . . . . . 4 4 4 5 4 4 4 e e f f f f . . . . . 
 . . . . . . 4 4 4 5 5 4 4 e e f f f f . . . . . 
 . . . . . . 4 4 4 4 5 4 4 e e f f f f . . . . . 
-. . . . . . 4 4 4 4 5 4 4 e e f f f f . . . . . 
-. . . . . . 4 4 4 5 5 4 4 e e f f f f . . . . . 
-. . . . . . . 4 4 5 4 4 4 e f f f f f . . . . . 
-. . . . . . . 4 4 5 4 4 4 e f f f f f . . . . . 
+. . . . . . . 4 4 4 5 4 4 e e f f f . . . . . . 
+. . . . . . . . 4 5 5 4 4 e e f . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
 `
         bottomImage = img`
 . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . e e e e . . . . . . . . . . . 
-. . . . . . . e e e e e e e e . . . . . . . . . 
-. . . . . . e e e e f f e e e e . . . . . . . . 
-. . . . . e e e f f f f f f e e e . . . . . . . 
-. . . . e e e f f f f f f f f e e e . . . . . . 
-. . . . e e f f f f f f f f f f e e . . . . . . 
-. . . . f e e f f f f f f f f e e f . . . . . . 
-. . . . f e e e f f f f f f e e e f . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . f e e . . . . . . . . e e f . . . . . . 
+. . . . f e e e . . . . . . e e e f . . . . . . 
 . . . . e 4 e e e e e e e e e e 4 e . . . . . . 
-. . . . e e 4 f e f f f f e f 4 e e . . . . . . 
+. . . . e e 4 4 e 4 4 4 4 e 4 4 e e . . . . . . 
 . . . . e e 4 4 4 4 4 4 4 4 4 4 e e . . . . . . 
 . . . . f e 4 4 5 4 4 4 4 4 f f e f . . . . . . 
 . . . . f e 4 4 5 5 4 4 4 4 f f e f . . . . . . 
@@ -478,24 +491,24 @@ game.onUpdateInterval(1500, function () {
 . . . . . . 4 4 4 4 5 4 e e e f f f f . . . . . 
 . . . . . 4 4 4 4 5 5 4 e e e e f f f f . . . . 
 . . . . . 4 4 4 4 5 4 4 e e e e e f f f . . . . 
-. . . . . 4 4 4 5 5 4 4 e e e e e f f f . . . . 
-. . . . . 4 4 4 5 4 4 4 e e e e e e f f f . . . 
-. . . . . 4 4 4 5 4 4 e e e e e e e f f f . . . 
-. . . . . 4 4 5 5 4 4 e e e e e e e f f f . . . 
+. . . . . . . 4 5 5 4 4 e e e e e f f . . . . . 
+. . . . . . . . . 4 4 4 e e e e e . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
 `
         bottomImage = img`
 . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . e e e e . . . . . . . . . . . 
-. . . . . . . e e e e e e e e . . . . . . . . . 
-. . . . . . e e e e f f e e e e . . . . . . . . 
-. . . . . e e e f f f f f f e e e . . . . . . . 
-. . . . e e e f f f f f f f f e e e . . . . . . 
-. . . . e e f f f f f f f f f f e e . . . . . . 
-. . . . f e e f f f f f f f f e e f . . . . . . 
-. . . . f e e e f f f f f f e e e f . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . f e e . . . . . . . . e e f . . . . . . 
+. . . . f e e e . . . . . . e e e f . . . . . . 
 . . . . e 4 e e e e e e e e e e 4 e . . . . . . 
-. . . . e e 4 f e f f f f e f 4 e e . . . . . . 
+. . . . e e 4 4 e 4 4 4 4 e 4 4 e e . . . . . . 
 . . . . e e 4 4 4 4 4 4 4 4 4 4 e e . . . . . . 
 . . . . f e 4 4 5 4 4 4 4 4 f f e f . . . . . . 
 . . . . f e 4 4 5 5 4 4 4 4 f f e f . . . . . . 
